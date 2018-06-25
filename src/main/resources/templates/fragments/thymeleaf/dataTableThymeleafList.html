@@ -23,9 +23,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="js : ${jsList}">
-									<td th:text="${js.name}"></td>
-									<td><a th:text="${js.name}" th:href="${js.path}"></a></td>
+								<tr th:each="dataTable : ${dataTableList}">
+									<td th:text="${dataTable.name}"></td>
+									<td><a th:text="${dataTable.path}" th:href="${dataTable.path}"></a></td>
 								</tr>
 							</tbody>
 						</table>

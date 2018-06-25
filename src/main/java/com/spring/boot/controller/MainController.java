@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.boot.model.JsInfo;
+import com.spring.boot.model.PagingVo;
 import com.spring.boot.service.TaskService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,20 +36,66 @@ public class MainController {
 		return "index";
 	}
 	
-	/* DataTable Version
-	@GetMapping("/js/list/view")
-	public String jsListView(HttpServletRequest request, ModelMap modelMap) {
-		log.info("jsListView");
+	@GetMapping("/datatable/list/view")
+	public String datatableListView(HttpServletRequest request, ModelMap modelMap) {
+		log.info("datatable");
 		
-		modelMap.addAttribute("page", "fragments/js/jsList");
+		modelMap.addAttribute("page", "fragments/dataTable/dataTableList");
 		
 		return "index";
 	}
 	
-	@GetMapping("/js/list")
+	@GetMapping("/datatable/list")
 	@ResponseBody
-	public PagingVo jsList(HttpServletRequest request, PagingVo pagingVo) throws JsonGenerationException, JsonMappingException, IOException {
-		log.info("jsList");
+	public ArrayList datatableList(HttpServletRequest request, PagingVo pagingVo) {
+		log.info("datatableList");
+		ArrayList arrayList = new ArrayList();
+		
+		try {
+			Path currentRelativePath = Paths.get("");
+			String s = currentRelativePath.toAbsolutePath().toString();
+			System.out.println("Current relative path is: " + s);
+			
+			Path rootDir = Paths.get("src/main/resources/static/dataTable");
+			log.info("rootDir : {}, rootDir.toFile() : {}", rootDir, rootDir.toFile());
+			
+			Files.walk(rootDir)
+				.filter(Files::isRegularFile)
+				.filter(file -> {
+					String fileName = file.getFileName().toString();
+//					log.info("fileName : {}", fileName);
+					return fileName.endsWith(".html");
+				})
+				.forEach(item -> {
+					String orgPath = item.toString();
+					String replacePath = orgPath.replace("src\\main\\resources\\static\\dataTable\\", "");
+					log.info("replacePath : {}", replacePath);
+					
+					JsInfo jsInfo = new JsInfo();
+					jsInfo.setName(item.getFileName().toString());
+					jsInfo.setPath(replacePath);
+					arrayList.add(jsInfo);
+				});
+		} catch (Exception e) {
+			log.error("Exception : {}", e);
+		}
+		
+		return arrayList;
+	}
+	
+	@GetMapping("/datatable/list/serverSide/view")
+	public String datatableServerSideListView(HttpServletRequest request, ModelMap modelMap) {
+		log.info("datatableServerSideListView");
+		
+//		modelMap.addAttribute("page", "fragments/dataTable/dataTableList");
+		
+		return "fragments/dataTable/dataTableServerSideList";
+	}
+	
+	@GetMapping("/datatable/serverSide/list")
+	@ResponseBody
+	public PagingVo datatableServerSideList(HttpServletRequest request, PagingVo pagingVo) {
+		log.info("datatableServerSideList");
 		
 		int offset  = Integer.parseInt(request.getParameter("start"));
 		int length =  Integer.parseInt(request.getParameter("length"));
@@ -59,10 +107,10 @@ public class MainController {
 		try {
 			Path currentRelativePath = Paths.get("");
 			String s = currentRelativePath.toAbsolutePath().toString();
-			log.debug("Current relative path is: {}", s);
+			System.out.println("Current relative path is: " + s);
 			
-			Path rootDir = Paths.get("src/main/resources/static/js");
-			log.debug("rootDir : {}, rootDir.toFile() : {}", rootDir, rootDir.toFile());
+			Path rootDir = Paths.get("src/main/resources/static/dataTable");
+			log.info("rootDir : {}, rootDir.toFile() : {}", rootDir, rootDir.toFile());
 			
 			Files.walk(rootDir)
 				.filter(Files::isRegularFile)
@@ -73,8 +121,8 @@ public class MainController {
 				})
 				.forEach(item -> {
 					String orgPath = item.toString();
-					String replacePath = orgPath.replace("src\\main\\resources\\static\\js\\", "");
-					log.debug("replacePath : {}", replacePath);
+					String replacePath = orgPath.replace("src\\main\\resources\\static\\dataTable\\", "");
+					log.info("replacePath : {}", replacePath);
 					
 					JsInfo jsInfo = new JsInfo();
 					jsInfo.setName(item.getFileName().toString());
@@ -85,20 +133,16 @@ public class MainController {
 			log.error("Exception : {}", e);
 		}
 		
-		log.info("jsList : {}", arrayList);
-		
 		pagingVo.setRecordsTotal(arrayList.size());
 		pagingVo.setRecordsFiltered(arrayList.size());
 		pagingVo.setData(arrayList);
 		
 		return pagingVo;
-//		return JsonUtil.marshallingJson(pagingVo);
 	}
-	*/
 	
-	@GetMapping("/datatable/list")
-	public String dataTableList(HttpServletRequest request, ModelMap modelMap) {
-		log.info("dataTableList");
+	@GetMapping("/datatable/thymeleaf/list")
+	public String dataTableThymeleafList(HttpServletRequest request, ModelMap modelMap) {
+		log.info("dataTableThymeleafList");
 		
 		ArrayList arrayList = new ArrayList();
 		
@@ -133,8 +177,8 @@ public class MainController {
 		
 		log.info("jsList : {}", arrayList);
 		
-		modelMap.addAttribute("page", "fragments/js/jsList");
-		modelMap.addAttribute("jsList", arrayList);
+		modelMap.addAttribute("page", "fragments/thymeleaf/dataTableThymeleafList");
+		modelMap.addAttribute("dataTableList", arrayList);
 		
 		return "index";
 	}
