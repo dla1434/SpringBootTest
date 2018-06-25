@@ -40,7 +40,12 @@
 							<tbody>
 								<tr th:each="dataTable : ${dataTableList}">
 									<td th:text="${dataTable.name}"></td>
-									<td><a th:text="${dataTable.path}" th:href="${dataTable.path}"></a></td>
+									<td><a th:text="${dataTable.path}" th:href="@{'../' + ${dataTable.path}}"></a></td>
+									<!-- 
+									<td><a th:text="${dataTable.path}" th:href="@{'~/' + ${dataTable.path}}"></a></td>
+									Fail) http://localhost:8080/ajax/ajax_json_add.html
+									-->
+<!-- 									<td><a th:text="${dataTable.path}" th:href="${dataTable.path}"></a></td> -->
 								</tr>
 							</tbody>
 						</table>
