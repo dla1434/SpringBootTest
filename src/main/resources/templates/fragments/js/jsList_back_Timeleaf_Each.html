@@ -25,7 +25,7 @@
 							<tbody>
 								<tr th:each="js : ${jsList}">
 									<td th:text="${js.name}"></td>
-									<td><a th:text="${js.path}" th:href="${js.path}"></a></td>
+									<td><a th:text="${js.name}" th:href="${js.path}"></a></td>
 								</tr>
 							</tbody>
 						</table>

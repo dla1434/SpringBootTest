@@ -1,0 +1,23 @@
+
+1. 설명
+	FLK_FDS 프로젝트는 기본 프로젝이고, 
+	주 목적은 아래의 기본적인 웹 언어를 테스트 하기 위한 용도의 프로젝트이다.
+		./webapp/test
+		./webapp/testAjax
+		./webapp/testAngular
+		./webapp/testDataTable
+		./webapp/testEms/test.html
+		./webapp/testEms
+		./webapp/testGraph
+		./webapp/testHtml
+		./webapp/testJavaScript
+		./webapp/testJquery
+		./webapp/testMdl
+		./webapp/testXml
+
+2. 웹 언어 테스트를 위한 프로젝트
+	http://localhost:8080/login/loginView.do
+	
+	위에 메인 페이지가 아닌 다음의 경우를 테스트 하기 위한 것이다. 
+		http://localhost:8080/testAjax/arrayList/ajax_json_array.jsp
+		http://localhost:8080/testDataTable/default_type_1/type_01.jsp

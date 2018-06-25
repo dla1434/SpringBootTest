@@ -1,0 +1,20 @@
+
+
+	
+1. DB 积己
+	# D:\MMS_磊丰\JH 沥府 磊丰\020. DB_Guide_Doc\100. Project\FDS\fds_schema.sql
+		DB 积己 			
+		USER 积己 绝澜
+			USE `fds`;
+			GRANT ALL privileges ON fds.* TO fds@'%' IDENTIFIED BY 'fds123';
+		TABLE 积己
+		TABLE DATA INSERT
+	
+	# D:\MMS_磊丰\JH 沥府 磊丰\020. DB_Guide_Doc\100. Project\FDS\fds_table_schema_n_data.sql
+		DB 积己 绝澜
+			CREATE DATABASE IF NOT EXISTS `fds`;
+		USER 积己 绝澜
+			GRANT ALL privileges ON fds.* TO fds@'%' IDENTIFIED BY 'fds123';
+		TABLE 积己
+		TABLE DATA INSERT
+	

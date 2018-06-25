@@ -34,19 +34,35 @@ public class MainController {
 		return "index";
 	}
 	
+	/* DataTable Version
+	@GetMapping("/js/list/view")
+	public String jsListView(HttpServletRequest request, ModelMap modelMap) {
+		log.info("jsListView");
+		
+		modelMap.addAttribute("page", "fragments/js/jsList");
+		
+		return "index";
+	}
+	
 	@GetMapping("/js/list")
-	public String jsList(HttpServletRequest request, ModelMap modelMap) {
+	@ResponseBody
+	public PagingVo jsList(HttpServletRequest request, PagingVo pagingVo) throws JsonGenerationException, JsonMappingException, IOException {
 		log.info("jsList");
+		
+		int offset  = Integer.parseInt(request.getParameter("start"));
+		int length =  Integer.parseInt(request.getParameter("length"));
+		pagingVo.setOffset(offset);
+		pagingVo.setLength(length);
 		
 		ArrayList arrayList = new ArrayList();
 		
 		try {
 			Path currentRelativePath = Paths.get("");
 			String s = currentRelativePath.toAbsolutePath().toString();
-			System.out.println("Current relative path is: " + s);
+			log.debug("Current relative path is: {}", s);
 			
 			Path rootDir = Paths.get("src/main/resources/static/js");
-			log.info("rootDir : {}, rootDir.toFile() : {}", rootDir, rootDir.toFile());
+			log.debug("rootDir : {}, rootDir.toFile() : {}", rootDir, rootDir.toFile());
 			
 			Files.walk(rootDir)
 				.filter(Files::isRegularFile)
@@ -58,6 +74,52 @@ public class MainController {
 				.forEach(item -> {
 					String orgPath = item.toString();
 					String replacePath = orgPath.replace("src\\main\\resources\\static\\js\\", "");
+					log.debug("replacePath : {}", replacePath);
+					
+					JsInfo jsInfo = new JsInfo();
+					jsInfo.setName(item.getFileName().toString());
+					jsInfo.setPath(replacePath);
+					arrayList.add(jsInfo);
+				});
+		} catch (Exception e) {
+			log.error("Exception : {}", e);
+		}
+		
+		log.info("jsList : {}", arrayList);
+		
+		pagingVo.setRecordsTotal(arrayList.size());
+		pagingVo.setRecordsFiltered(arrayList.size());
+		pagingVo.setData(arrayList);
+		
+		return pagingVo;
+//		return JsonUtil.marshallingJson(pagingVo);
+	}
+	*/
+	
+	@GetMapping("/datatable/list")
+	public String dataTableList(HttpServletRequest request, ModelMap modelMap) {
+		log.info("dataTableList");
+		
+		ArrayList arrayList = new ArrayList();
+		
+		try {
+			Path currentRelativePath = Paths.get("");
+			String s = currentRelativePath.toAbsolutePath().toString();
+			System.out.println("Current relative path is: " + s);
+			
+			Path rootDir = Paths.get("src/main/resources/static/dataTable");
+			log.info("rootDir : {}, rootDir.toFile() : {}", rootDir, rootDir.toFile());
+			
+			Files.walk(rootDir)
+				.filter(Files::isRegularFile)
+				.filter(file -> {
+					String fileName = file.getFileName().toString();
+//					log.info("fileName : {}", fileName);
+					return fileName.endsWith(".html");
+				})
+				.forEach(item -> {
+					String orgPath = item.toString();
+					String replacePath = orgPath.replace("src\\main\\resources\\static\\dataTable\\", "");
 					log.info("replacePath : {}", replacePath);
 					
 					JsInfo jsInfo = new JsInfo();

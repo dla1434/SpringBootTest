@@ -1,0 +1,13 @@
+
+1. DB 접속 정보 - Local 
+	# src/main/resources/spring/context/fds.datasource.xml
+		p:url="jdbc:mysql://localhost:3306/fds"
+		p:username="fds"
+		p:password="fds123"
+	
+2. DB 접속 정보 - FLK DB
+	# 집에서도 접속 안 된다.
+	# src/main/resources/spring/context/fds.datasource.xml
+		p:url="jdbc:mysql://112.172.129.150:3306/fds"
+		p:username="fds"
+		p:password="fds123"
