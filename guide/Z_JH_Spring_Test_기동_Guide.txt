@@ -1,0 +1,70 @@
+
+
+1. 기동
+	http://localhost:8080/login/loginView.do
+
+1. 기동 문제
+	1. pom.xml 추가
+		# base64 관련해서 못 찾는다..우선 다음을 추가하면 정상적으로 인식된다.
+			> 원인
+				org.apache.httpcomponents.httpclient가 중복되어 선언되어 있었다.
+				4.3.5 버전에는 commons-codec이 없는 듯 하다.
+			
+			> 해결방법1) 4.3.5를 안 지우더라도 아래를 추가하면 된다.
+				<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+				<dependency>
+					<groupId>commons-codec</groupId>
+					<artifactId>commons-codec</artifactId>
+					<version>1.9</version>
+				</dependency>
+			
+			> 해결 방법2) 중복되는 httpclient 4.3.5를 지운다.
+				<dependency>
+					<groupId>org.apache.httpcomponents</groupId>
+					<artifactId>httpclient</artifactId>
+					<version>4.3.5</version>
+				</dependency>
+				
+		# tomcat 기동 시 다음 에러
+			> 에러 내용 
+				심각: Error configuring application listener of class org.springframework.web.context.ContextLoaderListener
+				java.lang.ClassNotFoundException: org.springframework.web.context.ContextLoaderListener
+					at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+				
+				
+				2월 03, 2018 10:45:02 오전 org.apache.catalina.core.StandardContext listenerStart
+				심각: Error configuring application listener of class org.springframework.web.util.Log4jConfigListener
+				java.lang.ClassNotFoundException: org.springframework.web.util.Log4jConfigListener
+					at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+			
+			> 원인
+				톰켓이 제대로 안 떴을 때 주로 발생된다.
+				
+			> 해결
+				1. Maven Dependencies 인식 확인
+					프로젝트 선택 후 우클릭 > Deployment Assembly를 선택 > Add > Java Build Path Entries > Maven Dependencies 선택한 후, "Apply"를 해준다.
+				2. 1번에서 정상적으로 등록되어 있다면
+					톰켓을 지웠다 다시 추가
+				
+		# not found : classses/config/def/log4j.xml 등등 
+			> 원인
+				프로젝트에서 src/main/resources 폴더를 인식하지 못하고 있었다.
+				
+			> 해결
+				프로젝트 선택 후 우클릭 > Deployment Assembly를 선택 > Add > Folder에서 resouces를 찾아서 추가한다.
+				
+			> 기존 설정
+				: 모든 경로가 /로 경로가 잡혀 있었다.
+				: /src/main/resource는 인식도 안 잡혀 있었다.
+					/src/main/java -  /				
+					/src/main/webapp -  /
+					/src/test/java -  /
+					Maven Dependencies - WEB-INF/lib
+			
+			> 수정된 설정
+				/src/main/java -  WEB-INF/classes
+				/src/main/resource -  WEB-INF/classes
+				/src/main/webapp -  /
+				/src/test/java -  WEB-INF/classes
+				Maven Dependencies - WEB-INF/lib
+
