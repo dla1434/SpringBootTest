@@ -2,44 +2,32 @@
 <head>
 <meta charset="UTF-8">
 <meta content="utf-8" http-equiv="encoding">
-<title>MMSS Process ����</title>
-<!-- 
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
-<link rel="stylesheet" type="text/css" href="/css/dataTables.tableTools.css">
-<link rel="stylesheet" type="text/css" media="screen" href="/css/font-awesome.min.css">
- -->
- 
+<title>Modal Test</title>
 
 <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production-plugins.min.css">
-<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production.min.css">
-<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-skins.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/modal/css/smartadmin-production-plugins.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/modal/css/smartadmin-production.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/modal/css/smartadmin-skins.min.css">
 
-<!-- 
-<script src="/js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script src="/js/plugin/datatables/dataTables.tableTools.min.js"></script>
---> 
-<script src="/js/plugin/datatables/dataTables.buttons.min.js"></script>
-<script src="/js/libs/jquery-2.1.1.min.js"></script> 
-<script src="/js/bootstrap/bootstrap.min.js"></script> <!--�ʿ�  -->
-
+<script src="/resources/datatable/js/dataTables.buttons.min.js"></script>
+<script src="/resources/js/jquery-2.1.1.min.js"></script> 
+<script src="/resources/js/bootstrap.min.js"></script>
 
 <!-- IMPORTANT: APP CONFIG -->
-<script src="/js/app.config.js"></script>
+<script src="/resources/js/app.config.js"></script>
 
 <!-- MAIN APP JS FILE -->
-<script src="/js/app.min.js"></script>
+<script src="/resources/js/app.min.js"></script>
 
 <script>
 if (!window.jQuery) {
-	document.write('<script src="/js/libs/jquery-2.1.1.min.js"><\/script>');
+	document.write('<script src="/resources/js/jquery-2.1.1.min.js"><\/script>');
 }
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
 if (!window.jQuery.ui) {
-	document.write('<script src="/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+	document.write('<script src="/resources/js/jquery-ui-1.10.3.min.js"><\/script>');
 }
 </script>
 <style>
@@ -72,7 +60,7 @@ if (!window.jQuery.ui) {
 
 <div class="items-container">
 
-<!-- S: MMSS Proc �߰� Modal -->
+<!-- S: MMSS Proc 추가 Modal -->
 <div id="addProce_dialog">
 		<form id="add_mmss_proc_info" action="" class="smart-form">
 			<fieldset>			
@@ -106,7 +94,7 @@ if (!window.jQuery.ui) {
 			</fieldset>
 		</form>
 </div>
-<!-- E: MMSS Proc �߰� Modal -->
+<!-- E: MMSS Proc 추가 Modal -->
 
 </div>
 
@@ -123,8 +111,8 @@ var pagefunction = function() {
 	addMmssProcInfo('test', '01');
 };
 
-pageSetUp();  //Widget �� ���� function �¾�
-pagefunction(); //������ �Լ�
+pageSetUp();  //Widget 및 각종 function 셋업
+pagefunction(); //페이지 함수
 
 function addMmssProcInfo (mmssSvrName,mmssSvrId){
 	
@@ -137,9 +125,9 @@ function addMmssProcInfo (mmssSvrName,mmssSvrId){
 		width : 600,
 		resizable : false,
 		modal : true,
-		title : "MMSS Process �߰�",
+		title : "MMSS Process 추가",
 		buttons: {
-			 ����: function () {
+			 저장: function () {
 				
 				 $("#add_mmss_proc_info").validate({
 						// Rules for form validation
@@ -161,7 +149,7 @@ function addMmssProcInfo (mmssSvrName,mmssSvrId){
 						}
 					});
 			},	
-			 �ݱ�: function () {
+			 닫기: function () {
 					$("#add_mmss_proc_code").val("");
 					$("#add_mmss_proc_name").val("");
 					$(this).dialog("close"); 
