@@ -1,0 +1,6 @@
+
+1. 다운로드
+	https://getbootstrap.com/docs/4.1/getting-started/download/
+
+	> 이미 다운로드 받아서 폴더에 넣어놨다..근데 이크립스에서는 안 보인다.
+	> ZIP 파일은 스킵하는 거 같다..해당 경로로 직접 이동하면 보일 것이다.
