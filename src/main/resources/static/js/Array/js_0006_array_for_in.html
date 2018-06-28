@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function get_members(){
+            return ['t1', 't2', 't3']; 
+        }
+        
+        members = get_members();
+        
+        for(var i in members ){
+            document.write( members[i] );
+            document.write("<br />");
+        }
+    </script>
+</body>
+</html>
