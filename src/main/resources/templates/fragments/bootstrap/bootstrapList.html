@@ -64,7 +64,9 @@
 <script>
 	$(document).ready(function () {
 		$( '#table' ).dataTable({
-			ordering: true
+			ordering: true,
+			order: [1,'desc'],
+			iDisplayLength: 100
 		});
 	});
 </script>
