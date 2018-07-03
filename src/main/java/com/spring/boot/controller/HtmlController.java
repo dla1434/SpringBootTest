@@ -1,15 +1,21 @@
 package com.spring.boot.controller;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -64,12 +70,15 @@ public class HtmlController {
 	}
 	
 	@GetMapping("/html/list/action")
-	public String htmlAction(HttpServletRequest request, @RequestParam("cars") List cars, ModelMap modelMap) {
-		log.info("request : {}", request.getParameter("cars"));
-		log.info("@RequestParam List : {}", cars);
+	public void htmlAction(HttpServletRequest request, HttpServletResponse response, @RequestParam("feature") List feature, ModelMap modelMap) throws IOException {
+		log.info("request : {}", request.getParameter("feature"));
+		log.info("@RequestParam List : {}", feature);
 		
-		modelMap.addAttribute("page", "fragments/html/htmlList");
+//		String strFeature = Arrays.asList(feature).stream()
+//			.map(n -> n.toString())
+//			.collect( Collectors.joining("|"));
+		log.info("StringJoin : {}", String.join(",", feature));
 		
-		return "index";
+		response.sendRedirect("/html/list");
 	}
 }
