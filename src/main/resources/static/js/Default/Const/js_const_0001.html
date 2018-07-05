@@ -15,20 +15,8 @@
 		<hr>
 
 		<script>
-			my_obj = new obj();
-			my_obj.add('key1', 'value1');
-
-			function obj() {
-				obj = new Object();
-				this.add = function(key, value) {
-					obj[key] = value;
-				}
-				this.obj = obj;
-			}
-
-			//객체 값 출력
-			//결과) Object {u1: "user1", u2: "user2"}
-			console.log(my_obj.obj);
+			console.log(RESOURCE.QUEUE);
+			console.log(RESOURCE['TMPFILE']);
 		</script>
 	</div>
 </body>
