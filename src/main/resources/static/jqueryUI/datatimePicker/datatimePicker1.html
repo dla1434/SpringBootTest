@@ -4,6 +4,21 @@
 <script>
 	$(function(){
 		$('.datetimepicker').appendDtpicker({'locale':'ko'});
+		
+		$('.datetimepicker').click(function(){
+			console.log('test');
+		});
+		
+		$('#show').click(function(){
+			$('.datepicker').show();
+		});
+		
+		$('#hide').click(function(){
+			$('.datepicker').hide();
+		});
 	});
+	
 </script>
 <input type="text" class='datetimepicker' value="">
+<input type="button" id="show" value="show">
+<input type="button" id="hide" value="hide">
