@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="/resources/jquery/jquery-3.1.1.min.js"></script>
+<script src="/resources/jquery/jquery-ui-1.10.3.min.js"></script>
+<script src="/resources/validate/jquery.validate.min.js"></script>
+<script src="/resources/validate/additional-methods.min.js"></script>
+<script src="/resources/validate/localization/messages_ko.min.js"></script>
+
+</head>
+<body>
+	<form action="">
+		<input type="text" name="txt1" required="required"/><br/>
+		<input type="text" name="txt2" /><br/>
+		<input type="text" name="txt3" required="required"/><br/>
+		<input type="text" name="txt4" required="required"/><br/>
+		<input type="submit"  value="저장" />
+	</form>
+</body>
+</html>
+
+<script>
+	$(function(){
+		$("form").validate();
+	})
+</script>

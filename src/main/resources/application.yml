@@ -1,0 +1,31 @@
+
+# Tomcat
+server:
+  port: 8080
+
+# Thymeleaf 
+# cache - For Thymeleaf Auto Reload
+spring:
+  thymeleaf:
+    cache: false
+  profiles:
+      active: local
+
+# JPA - @GeneratedValue(strategy=GenerationType.AUTO)일때 에러 발생 방지 처리
+# ddl-auto - Default is none
+# show-sql - JPA 퀴리 출력
+  #logging.level.org.hibernate.SQL:debug : 디버그 모드에서는 퀴리가 보인다.
+  # DEBUG가 아닌 경우에도 퀴리를 보고 싶다면 다음 옵션을 수행하면 된다.
+  jpa:
+    hibernate:
+      ddl-auto: update      
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        id:
+          new_generator_mappings: false
+
+# Resource Path - 아래는 default 경로인데..잘 안 잡히면 추가해보자
+  resources:
+    static-locations: classpath:/resources/,classpath:/static/

@@ -1,0 +1,11 @@
+
+# Resource
+spring:
+  profiles: dev
+
+# Mysql DataBase
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.20.38.181:13306/es_test
+    username: root
+    password: root1234
